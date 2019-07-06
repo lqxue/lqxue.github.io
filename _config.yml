@@ -3,13 +3,15 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: LQxue Blogs
-subtitle: 1
+# 网站标题显示
+title: LQxue's Blog
+#网站副标题
+subtitle: 
 # 站点的描述
 description: 记录生活的点点滴滴
-keywords: 3
+keywords: 
 # 作者的昵称
-author: lqx
+author: 青月
 # 语言切换成中文
 language: zh-Hans
 # 配置时区
@@ -54,7 +56,7 @@ highlight:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 10
+  per_page: 5
   order_by: -date
   
 # Category & Tag
