@@ -4,7 +4,6 @@ date: 2016-8-22
 tags:
   - 
   - 
-comments: true
 categories: Git
 ---
 
@@ -18,7 +17,7 @@ categories: Git
 - Windows安装git
 [下载Windows版本Git](https://git-scm.com/download/win)
 安装完成后，在开始菜单里找到`“Git”->“Git Bash”`，蹦出一个类似命令行窗口的东西，就说明Git安装成功！
-![Git Bash](https://upload-images.jianshu.io/upload_images/3846387-8b30a6b7d3b1d33f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![Git Bash](https://upload-images.jianshu.io/upload_images/3846387-5e2c267fa860eb25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## 初次运行 Git 前的配置
 一般在新的系统上，我们都需要先配置下自己的 Git 工作环境。配置工作只需一次，以后升级时还会沿用现在的配置。当然，如果需要，你随时可以用相同的命令修改已有的配置。
@@ -448,3 +447,38 @@ git merge 命令。 如果有一个像之前章节中演示的设置好的跟踪
 或 checkout 命令为你创建的，git pull 都会查找当前分支所跟踪的服务器与分支，从服务器上抓取数据然
 后尝试合并入那个远程分支。
 由于 git pull 的魔法经常令人困惑所以通常单独显式地使用 fetch 与 merge 命令会更好一些。
+
+- 克隆
+执行git clone URL后,默认只会克隆master分支,并将本地master分支和远程创库的msater分支建立关系,那么如何克隆出所有分支呢?
+当克隆完后执行`git branch -a`
+```
+$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/hexo
+  remotes/origin/master
+```
+你会发现 除了主分支和远程分支建立了联系外其他的分支并没有建立
+`git branch --track ${branch##*/} $branch`
+这句是创建本地分支并和远程分支建立关系,
+${branch##*/}是本地分支名
+$branch是远程分支
+对应此处就是要执行
+`git branch --track hexo origin/hexo`
+```
+$ git branch -a
+  hexo
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/hexo
+  remotes/origin/master
+```
+最后发现本地和远程hexo分支建立联系了  接下来就是切换到`hexo`分支
+`git checkout hexo`
+切换后要pull下代码
+```
+git fetch --all
+git pull --all
+```
+这两句的意思就是更新所有分支上的代码到最新的状态
+这两步执行后就可以克隆出所有分支了
