@@ -17,7 +17,7 @@ categories: Git
 - Windows安装git
 [下载Windows版本Git](https://git-scm.com/download/win)
 安装完成后，在开始菜单里找到`“Git”->“Git Bash”`，蹦出一个类似命令行窗口的东西，就说明Git安装成功！
-![Git Bash](https://upload-images.jianshu.io/upload_images/3846387-5e2c267fa860eb25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![Git Bash](https://raw.githubusercontent.com/lqxue/picture_list/master/image/GitBash_1099779f-d52c-45f5-9903-9f3a1ab7b872.png)
 
 ## 初次运行 Git 前的配置
 一般在新的系统上，我们都需要先配置下自己的 Git 工作环境。配置工作只需一次，以后升级时还会沿用现在的配置。当然，如果需要，你随时可以用相同的命令修改已有的配置。
