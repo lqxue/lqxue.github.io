@@ -73,12 +73,11 @@ The key fingerprint is:
 最后得到了两个文件：id_rsa和id_rsa.pub
 ```
 将公钥放配置到github上或者其他的平台,这里多说下(克隆用SSH地址,不要用https,否则会总输入用户名和密码)
-![QQ截图20170324102831.jpg](http://upload-images.jianshu.io/upload_images/3846387-30655181799f85ab.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/550)
+![](https://raw.githubusercontent.com/lqxue/picture_list/master/image/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20190708165505.png)
 - 测试是否成功
 ```
 $ ssh -T git@github.com
 ```
-![QQ截图20170324102142.jpg](http://upload-images.jianshu.io/upload_images/3846387-4686486adf75e583.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/550)
 
 ### 多账号ssh配置
 - 生成指定名字的密钥
@@ -86,7 +85,6 @@ $ ssh -T git@github.com
 $ ssh-keygen -t rsa -C "邮箱地址" -f ~/.ssh/github_jslite
 ```
 会在.ssh文件夹中生成github_jslite和github_jslite.pub这两个文件
-![查看](http://upload-images.jianshu.io/upload_images/3846387-49893a6da473d726.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/550)
 - 密钥复制到托管平台上
 ```
 //查看秘钥
@@ -147,9 +145,30 @@ git push origin master //同步到远程库
 `git remote set-url --add origin <url>`
 就是往当前git项目的config文件里增加一行记录 
 打开config文件：
-![](http://upload-images.jianshu.io/upload_images/3846387-a85db8f6c5113e6a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+```
+[core]
+  repositoryformatversion = 0
+  filemode = false
+  bare = false
+  logallrefupdates = true
+  symlinks = false
+  ignorecase = true
+  hideDotFiles = dotGitOnly
+[remote "origin"]
+  url = git@10.12.133.21:andxxd/xxx.git
+  fetch = +refs/heads/*:refs/remotes/origin/*
+  url = git@github.com:xxx/xxx.git
+[branch "master"]
+  remote = origin
+  merge = refs/heads/master
+```
 `git remote -v`:显示当前所有远程库的详细信息，显示格式为远程库名字 url连接(类型)
-![](http://upload-images.jianshu.io/upload_images/3846387-c576e9cf3c8f418e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+```
+$ git remote -v
+origin  git@10.12.133.21:andxxd/xxx.git (fetch)
+origin  git@10.12.133.21:andxxd/xxx.git (push)
+origin  git@github.com:xxx/xxx.git (push)
+```
 所以说，你直接在config里面直接添加url来修改也是可以的，不必去执行git命令。
 **注意**
 使用`git push origin master`时，你可以`push到origin`的多个url地址， 
@@ -202,7 +221,7 @@ git push origin master
 ```
 可以把 master 换成你想要推送的任何分支。
 记录每次更新到仓库
-![image.png](https://upload-images.jianshu.io/upload_images/3846387-f1b68fdf511e6c20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://raw.githubusercontent.com/lqxue/picture_list/master/image/3846387-f1b68fdf511e6c20.png)
 
 ### 忽略文件
 在添加到暂存区前要先配置忽略文件,如果忘了配置了也没关系在没有提交到服务器之前都可以回退
@@ -358,7 +377,7 @@ $ git commit -m "remove test.txt"
 - 版本库（Repository）工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。
 Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。
 
-![](http://upload-images.jianshu.io/upload_images/3846387-8cf5781ce75be78b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://raw.githubusercontent.com/lqxue/picture_list/master/image/3846387-8cf5781ce75be78b.jpg)
 
 第一步是用git add把文件添加进去，实际上就是把文件修改添加到暂存区；
 第二步是用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支。
@@ -377,7 +396,9 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 ## 分支
 
 - 分支图
-![](http://upload-images.jianshu.io/upload_images/3846387-88817c76b6337811.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/550)
+
+![](https://raw.githubusercontent.com/lqxue/picture_list/master/image/3846387-88817c76b6337811.jpg)
+
 - 查看分支：git branch
 ```
 $ git branch

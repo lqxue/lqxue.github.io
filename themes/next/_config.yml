@@ -74,7 +74,7 @@ footer:
 # Canonical, set a canonical link tag in your hexo, you could use it for your SEO of blog.
 # See: https://support.google.com/webmasters/answer/139066
 # Tips: Before you open this tag, remember set up your URL in hexo _config.yml ( ex. url: http://yourdomain.com )
-canonical: true
+canonical: false
 
 # Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
 seo: false
@@ -149,12 +149,14 @@ social_icons:
 
 # Blog rolls
 # 友情链接设置
-links_icon: link
-links_title: Links
-links_layout: block
+#links_icon: link
+#友情链接名字显示
+#links_title: Links
+#links_layout: block
 #links_layout: inline
-links:
-  SherlockGy's Blog: https://sherlockgy.github.io/
+#友情链接
+#links:
+#  SherlockGy's Blog: https://sherlockgy.github.io/
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
@@ -189,8 +191,8 @@ sidebar:
   #  - always  expand for all pages automatically
   #  - hide    expand only when click on the sidebar toggle icon.
   #  - remove  Totally remove sidebar including sidebar toggle.
-  #display: post
-  display: always
+  display: post
+  #display: always
   #display: hide
   #display: remove
 
@@ -201,6 +203,7 @@ sidebar:
   b2t: false
 
   # Scroll percent label in b2t button.
+  # 在B2T按钮中滚动百分比标签。
   scrollpercent: true
 
   # Enable sidebar on narrow view (only for Muse | Mist).
@@ -229,17 +232,24 @@ auto_excerpt:
 
 # Post meta display settings
 post_meta:
-  item_text: true
+  #发表时间字样显示
+  # 发表于 2016-08-22 |  更新于: 2019-07-08 |  分类于 Git
+  item_text: false
+  #标题下面显示时间设置
   created_at: true
-  updated_at: false
+  updated_at: true
+  #标题下是否显示分类
   categories: true
 
 # Post wordcount display settings
 # Dependencies: https://github.com/willin/hexo-wordcount
 post_wordcount:
-  item_text: true
-  wordcount: false
-  min2read: false
+  item_text: false
+  # 单篇 字数统计
+  wordcount: true
+  # 单篇 阅读时长
+  min2read: true
+  # 网站 字数统计
   totalcount: false
   separated_meta: true
 
@@ -250,23 +260,26 @@ post_wordcount:
   #description: ex. subscribe to my blog by scanning my public wechat account
 
 # Reward
+# 打赏
 #reward_comment: Donate comment here
 #wechatpay: /images/wechatpay.jpg
 #alipay: /images/alipay.jpg
 #bitcoin: /images/bitcoin.png
 
 # Declare license on posts
+# 版权 转载设置
 post_copyright:
-  enable: false
+  enable: true
   license: CC BY-NC-SA 3.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/3.0/
 
 
 # ---------------------------------------------------------------
-# Misc Theme Settings
+# 其他主题设置
 # ---------------------------------------------------------------
 
 # Reduce padding / margin indents on devices with narrow width.
+# 减少窄宽度设备上的填充/边距缩进。
 mobile_layout_economy: false
 
 # Android Chrome header panel color ($black-deep).
@@ -279,7 +292,7 @@ android_chrome_color: "#222"
 #   image: url-of-image   - Images's url
 custom_logo:
   enabled: false
-  image:
+  image: 
 
 # Code Highlight theme
 # Available value:
@@ -355,6 +368,7 @@ mathjax:
   cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML
 
 # Han Support docs: https://hanzi.pro/
+# 文章的顶部描述字体设置
 han: false
 
 # Swiftype Search API Key
@@ -495,7 +509,7 @@ needmoreshare2:
 # user_id must NOT be null when admin_enable is true!
 # you can visit http://dev.duoshuo.com get duoshuo user id.
 duoshuo_info:
-  ua_enable: true
+  ua_enable: false
   admin_enable: false
   user_id: 0
   #admin_nickname: Author
@@ -539,6 +553,8 @@ rating:
 
 # Show number of visitors to each article.
 # You can visit https://leancloud.cn get AppID and AppKey.
+# 显示每篇文章的访问者数量。
+#您可以访问https://leancloud.cn获取appid和appkey。
 leancloud_visitors:
   enable: false
   app_id: #<app_id>
@@ -547,6 +563,9 @@ leancloud_visitors:
 # Another tool to show number of visitors to each article.
 # visit https://console.firebase.google.com/u/0/ to get apiKey and projectId
 # visit https://firebase.google.com/docs/firestore/ to get more information about firestore
+# 另一个显示每一篇文章访问者数量的工具。
+#访问https://console.firebase.google.com/u/0/获取apikey和projectid
+#访问https://firebase.google.com/docs/firestore/获取有关firestore的更多信息
 firestore:
   enable: false
   collection: articles #required, a string collection name to access firestore database
@@ -556,22 +575,36 @@ firestore:
 
 # Show PV/UV of the website/page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi/
+# 卜算子统计
+# 当enable: true时，代表开启全局开关。若site_uv、site_pv、page_pv的值均为false时，不蒜子仅作记录而不会在页面上显示。
 busuanzi_count:
   # count values only if the other configs are false
-  # 启动百度统计
   enable: true
   # custom uv span for the whole site
+  # 当site_uv: true时，代表在页面底部显示站点的UV值。
+  #site_uv_header和site_uv_footer为自定义样式配置，
+  #相关的值留空时将不显示，可以使用（带特效的）font-awesome。显示效果为[site_uv_header]UV值[site_uv_footer]。
+
+  # 效果：本站访客数12345人次
   site_uv: true
-  site_uv_header: <i class="fa fa-user"></i>
-  site_uv_footer:
+  site_uv_header: <i class="fa fa-user">  本站访客数</i>
+  site_uv_footer: 人次
   # custom pv span for the whole site
+  # 当site_pv: true时，代表在页面底部显示站点的PV值。
+  #site_pv_header和site_pv_footer为自定义样式配置，
+  #相关的值留空时将不显示，可以使用（带特效的）font-awesome。显示效果为[site_pv_header]PV值[site_pv_footer]。
+
+# 效果：本站总访问量12345次
   site_pv: true
-  site_pv_header: <i class="fa fa-eye"></i>
-  site_pv_footer:
+  site_pv_header: <i class="fa fa-eye">  本站总访问量</i>
+  site_pv_footer: 次
   # custom pv span for one page only
+  # 当page_pv: true时，代表在文章页面的标题下显示该页面的PV值（阅读数）。
+  # page_pv_header和page_pv_footer为自定义样式配置，
+  # 相关的值留空时将不显示，可以使用（带特效的）font-awesome。显示效果为[page_pv_header]PV值[page_pv_footer]。
   page_pv: true
-  page_pv_header: <i class="fa fa-file-o"></i>
-  page_pv_footer:
+  page_pv_header: <i class="fa fa-file-o">  本文总阅读量</i>
+  page_pv_footer: 次
 
 
 # Tencent analytics ID
@@ -582,7 +615,6 @@ busuanzi_count:
 
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO
-baidu_push: true
 
 # Google Calendar
 # Share your recent schedule to others via calendar page
@@ -590,7 +622,7 @@ baidu_push: true
 # API Documentation:
 # https://developers.google.com/google-apps/calendar/v3/reference/events/list
 calendar:
-  enable: true
+  enable: false
   calendar_id: <required>
   api_key: <required>
   orderBy: startTime
@@ -603,7 +635,7 @@ calendar:
 
 # Algolia Search
 algolia_search:
-  enable: true
+  enable: false
   hits:
     per_page: 10
   labels:
@@ -613,6 +645,7 @@ algolia_search:
 
 # Local search
 # Dependencies: https://github.com/flashlab/hexo-generator-search
+# 开启搜索
 local_search:
   enable: true
   # if auto, trigger search by changing input
@@ -652,7 +685,7 @@ label: true
 tabs:
   enable: true
   transition:
-    tabs: false
+    tabs: true
     labels: true
   border_radius: 0
 
@@ -683,10 +716,12 @@ motion:
     sidebar: slideUpIn
 
 # Fancybox
+# 图片查看弹窗
 fancybox: true
 
 # Progress bar in the top during page loading.
-pace: false
+# 页面加载过程中顶部的进度条。
+pace: true
 # Themes list:
 #pace-theme-big-counter
 #pace-theme-bounce
@@ -703,10 +738,13 @@ pace: false
 #pace-theme-minimal
 # For example
 # pace_theme: pace-theme-center-simple
+# 加载速度主题
 pace_theme: pace-theme-minimal
+#pace_theme: pace-theme-big-counter
 
 # Canvas-nest
-canvas_nest: false
+# 网页背景设置 聚集鼠标点
+canvas_nest: true
 
 # three_waves
 three_waves: false
@@ -722,6 +760,11 @@ canvas_sphere: false
 # size: The width of the ribbon.
 # alpha: The transparency of the ribbon.
 # zIndex: The display level of the ribbon.
+# #只适合双鱼座
+#帆布丝带
+#尺寸：色带的宽度。
+#阿尔法：色带的透明度。
+#zindex：色带的显示级别。
 canvas_ribbon:
   enable: false
   size: 300
