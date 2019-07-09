@@ -1,7 +1,16 @@
 // Custom styles.
+
+body {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #2f2f2f;
+    //background: #f5f7f9;
+}
+
 ul {
-  padding-inline-start: 20px;
-  margin:0
+  margin:0 0 20px 0;
+  //上右下左
+  padding: 0 0 0 20px;
 }
 .posts-expand .post-body ul li {
     list-style: disc;
@@ -16,31 +25,67 @@ ul {
 }
 
 p {
-    margin: 0 0 0 0;
+    margin: 0 0 20px 0;
 }
-
+//引文 >
 blockquote {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-        padding: 0 7px;
-        margin:0
+        padding: 0 10px;
+        margin:0 0 20px 0
 }
 
-h2, h3, h4, h5, h6 {
-    margin: 15px 0 15px;
+header h1{
+font-size: 26px;
+color: #2f2f2f;
+}
+.post-body h1,h2, h3, h4, h5, h6 {
+    margin: 0 0 20px 0;
+    padding: 0
+    color: #2f2f2f;
+    //设置正文中的字体大小
+    font-weight: 400;
 }
 
-pre, .highlight {
-    margin: 0px 0;
+.posts-expand .post-body h1 {
+font-size: 26px;
+    padding: 0;
 }
 
-figure {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+.posts-expand .post-body h2 {
+    padding: 0;
+        font-size: 24px;
 }
+.posts-expand .post-body h3 {
+font-size: 22px;
+ padding: 0;
+}
+.posts-expand .post-body h4 {
+font-size: 20px;
+ padding: 0;
+}
+.posts-expand .post-body h5 {
+font-size: 18px;
+ padding: 0;
+}
+.posts-expand .post-body h6 {
+font-size: 16px;
+ padding: 0;
+}
+
+
+code{
+    color: #c7254e;
+}
+
+//代码区域 控制下面间距
+.post-body .highlight {
+    margin:0 0 20px 0
+}
+
+//更改正文的链接
+p a {
+   color: #3194d0;
+   border-bottom: 1px solid #ffff;
+}
+

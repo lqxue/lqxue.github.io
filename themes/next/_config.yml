@@ -47,7 +47,7 @@ footer:
   # Specify the date when the site was setup.
   # If not defined, current year will be used.
   # 站点建立时间
-  since: 
+  since:
 
   # Icon between year and copyright info.
   icon: user
@@ -98,7 +98,7 @@ menu:
   tags: /tags/ || tags
   categories: /categories/ || th
   archives: /archives/ || archive
-  #search: /search/ 
+  #search: /search/
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
@@ -145,7 +145,7 @@ social_icons:
   enable: true
   icons_only: false
   transition: false
-  
+
 
 # Blog rolls
 # 友情链接设置
@@ -292,7 +292,7 @@ android_chrome_color: "#222"
 #   image: url-of-image   - Images's url
 custom_logo:
   enabled: false
-  image: 
+  image:
 
 # Code Highlight theme
 # Available value:
@@ -744,7 +744,7 @@ pace_theme: pace-theme-minimal
 
 # Canvas-nest
 # 网页背景设置 聚集鼠标点
-canvas_nest: true
+canvas_nest: false
 
 # three_waves
 three_waves: false
