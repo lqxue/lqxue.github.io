@@ -9,6 +9,8 @@ categories: Android
 
 > 图片加载很是重要,我也对比过别的库,觉得还是Glide好用,我只是简单的分享下我开发用到的相关使用方法
 
+[Glide](https://github.com/bumptech/glide)
+
 如果想深入研究下可以参考[Glide最全解析](https://blog.csdn.net/sinyu890807/column/info/15318)
 
 ## Glide的配置
@@ -298,3 +300,46 @@ Glide.with(this)
     .bitmapTransform(new RoundedCornersTransformation(this, 30, 0, RoundedCornersTransformation.CornerType.BOTTOM))
     .into(iv);
 ```
+
+### ViewTarget
+
+用于配合View集成使用
+
+```java
+// 写一个自定义View
+public class MyLayout extends LinearLayout {
+    
+    // 定义一个ViewTarget, 注意泛型
+    private ViewTarget<MyLayout, GlideDrawable> viewTarget; 
+
+    public MyLayout(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        
+        // 创建并重写代码，其实和SimpleTarget是一样的
+        viewTarget = new ViewTarget<MyLayout, GlideDrawable>(this) {
+            @Override
+            public void onResourceReady(GlideDrawable resource, GlideAnimation glideAnimation) {
+                MyLayout myLayout = getView();
+                myLayout.setImageAsBackground(resource);
+            }
+        };
+    }
+
+    // 重要的是这个方法，使用Glide的时候需要调用这个方法来得到一个Target
+    public ViewTarget<MyLayout, GlideDrawable> getTarget() {
+        return viewTarget;
+    }
+
+    public void setImageAsBackground(GlideDrawable resource) {
+        setBackground(resource);
+    }
+}
+```
+
+使用
+
+```java
+Glide.with(this)
+    .load(url)
+    .into(myLayout.getTarget());
+ ```
