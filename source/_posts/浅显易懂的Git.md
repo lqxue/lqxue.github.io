@@ -15,7 +15,9 @@ categories: Git
 - 在Linux上安装Git
 
 如果你碰巧用Debian或Ubuntu，通过一条`sudo apt-get install git`就可以直接完成Git的安装，非常简单。
+
 <!-- more -->
+
 - Windows安装git
 
 [下载Windows版本Git](https://git-scm.com/download/win)
