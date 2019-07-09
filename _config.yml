@@ -45,10 +45,13 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
+#是否支持代码高亮
   enable: true
-  line_number: true
+  #是否显示代码行号
+  line_number: false
+#如果设置为true 在markdown中必须要指定语言类型,false就不需要指定  当然不指定就是黑白色
   auto_detect: true
-  tab_replace:
+  tab_replace: false
   
 # Home page setting
 # path: Root path for your blogs index page. (default = '')

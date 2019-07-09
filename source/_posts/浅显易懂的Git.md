@@ -3,7 +3,6 @@ title: 浅显易懂的Git
 date: 2016-8-22
 tags:
   - Git
-  - 
 categories: Git
 ---
 
@@ -16,11 +15,11 @@ categories: Git
 - 在Linux上安装Git
 
 如果你碰巧用Debian或Ubuntu，通过一条`sudo apt-get install git`就可以直接完成Git的安装，非常简单。
-
+<!-- more -->
 - Windows安装git
 
 [下载Windows版本Git](https://git-scm.com/download/win)
-安装完成后，在开始菜单里找到`“Git”->“Git Bash”`，蹦出一个类似命令行窗口的东西，就说明Git安装成功！
+安装完成后，在开始菜单里找到`Git -> Git Bash`，蹦出一个类似命令行窗口的东西，就说明Git安装成功！
 
 ![Git Bash](https://raw.githubusercontent.com/lqxue/picture_list/master/image/GitBash_1099779f-d52c-45f5-9903-9f3a1ab7b872.png)
 
@@ -50,12 +49,12 @@ git config --global user.email "schacon@gmail.com"
 ```
 
 这两条配置很重要，每次 Git 提交时都会引用这两条信息，说明是谁提交了更新，所以会随更新内容一起被永久纳入历史记录：
-注意git config命令的--global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
-如果用了 --global 选项，那么更改的配置文件就是位于你用户主目录下，以后你所有的项目都会默认使用这里配置的用户信息。如果要在某个特定的项目中使用其他名字或者电邮，只要去掉 --global 选项重新配置即可，新的设定保存在当前项目的 .git/config 文件里。
+注意`git config`命令的`--global`参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
+如果用了 --global 选项，那么更改的配置文件就是位于你用户主目录下，以后你所有的项目都会默认使用这里配置的用户信息。如果要在某个特定的项目中使用其他名字或者电邮，只要去掉 --global 选项重新配置即可，新的设定保存在当前项目的 `.git/config` 文件里。
 
 ### 查看配置信息
 
-要检查已有的配置信息，可以使用 git config --list 命令：
+要检查已有的配置信息，可以使用 `git config --list` 命令：
 
 ```java
 $ git config --list
@@ -99,7 +98,7 @@ The key fingerprint is:
 最后得到了两个文件：id_rsa和id_rsa.pub
 ```
 
-将公钥放配置到github上或者其他的平台,这里多说下(克隆用SSH地址,不要用https,否则会总输入用户名和密码)
+将公钥放配置到github上或者其他的平台,这里多说下(克隆用`SSH`地址,不要用`https`,否则会总输入用户名和密码)
 
 ![](https://raw.githubusercontent.com/lqxue/picture_list/master/image/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20190708165505.png)
 
@@ -117,7 +116,7 @@ $ ssh -T git@github.com
 $ ssh-keygen -t rsa -C "邮箱地址" -f ~/.ssh/github_jslite
 ```
 
-会在.ssh文件夹中生成github_jslite和github_jslite.pub这两个文件
+会在.ssh文件夹中生成`github_jslite`和`github_jslite.pub`这两个文件
 
 - 密钥复制到托管平台上
 
@@ -126,7 +125,7 @@ $ ssh-keygen -t rsa -C "邮箱地址" -f ~/.ssh/github_jslite
 vi ~/.ssh/github_jslite.pub
 ```
 
-打开公钥文件github_jslite.pub，并把内容复制至代码托管平台上,不要多复制空格和回车
+打开公钥文件`github_jslite.pub`，并把内容复制至代码托管平台上,不要多复制空格和回车
 
 - 添加config文件
 
@@ -162,10 +161,10 @@ git remote add origin https://github.com/JSLite/JSLite.git
 
 此处要注意,远程库中的文件不能比本地多(初始化远程仓库的时候不要选择任何的初始化文件,如果有也要手动删除),否则会失败,如果是要将本地的项目推送到一个新的平台也可以选择强推`git push -f`这样你就能够将你的改动推送到所添加的服务器上去了.
 
-- 但是你可能想要把你的本地的git库，既push到github上，又push到开源中国的Git@OSC上，怎么解决呢?
+- 但是你可能想要把你的本地的git库，既push到github上，又push到码云上，怎么解决呢?
 
 方法如下：
-此处假设你已经在github上clone了你的项目, 
+此处假设你已经在github上clone了你的项目,
 其次你现在想要增加一个码云远程库地址 :
 `git remote set-url --add origin <url1>`
 `<url1>`就是git地址
@@ -173,7 +172,7 @@ git remote add origin https://github.com/JSLite/JSLite.git
 `git@git.oschina.net:hqx/tst.git`
 然后你还可以增加第二个地址
 ` git remote set-url --add origin <url2> `
-增加第三个地址 
+增加第三个地址
 `git remote set-url --add origin <url3> `
 ….依次类推
 添加完这些之后第一次提交前要执行:
@@ -195,7 +194,7 @@ git push origin master //同步到远程库
 - 原理解析
 
 `git remote set-url --add origin <url>`
-就是往当前git项目的config文件里增加一行记录 
+就是往当前git项目的config文件里增加一行记录
 打开config文件：
 
 ```java
@@ -227,8 +226,8 @@ origin  git@github.com:xxx/xxx.git (push)
 
 所以说，你直接在config里面直接添加url来修改也是可以的，不必去执行git命令。
 **注意**
-使用`git push origin master`时，你可以`push到origin`的多个url地址， 
-但是使用 `git pull`时，只能拉取origin里的一个url地址(即fetch-url，如上图)，这个fetch-url默认为你添加的到origin的第一个地址， 
+使用`git push origin master`时，你可以`push到origin`的多个url地址，
+但是使用 `git pull`时，只能拉取origin里的一个url地址(即fetch-url，如上图)，这个fetch-url默认为你添加的到origin的第一个地址，
 如果你想更改，只需要更改config文件里，那三个url的顺序即可，fetch-url会直接对应排行第一的那个url连接。调整好可以用`git remote -v`看一下
 
 ### 克隆远程仓库
@@ -244,7 +243,7 @@ git init
 - 创建本地仓库的克隆版本：
 
 ```java
-git clone /path/to/repository 
+git clone /path/to/repository
 ```
 
 - 克隆远端服务器上的仓库
@@ -277,7 +276,7 @@ git add <filename>
 #添加文件,可以连续添加
 git add <filename1>
 #添加所有文件,要提前配置好忽略文件否则都会添加
-git add . 
+git add .
 ```
 
 - 提交到 HEAD
@@ -310,10 +309,9 @@ GitHub 有一个十分详细的针对数十种项目及语言的 .gitignore 文�
 ### 移除文件
 
 要从 Git 中移除某个文件，就必须要从已跟踪文件清单中移除（确切地说，是从暂存区域移除），然后提交。
-可以用 git rm 命令完成此项工作，并连带从工作目录中删除指定的文件，这样以后就不会出现在未跟踪文件清
+可以用 `git rm` 命令完成此项工作，并连带从工作目录中删除指定的文件，这样以后就不会出现在未跟踪文件清
 单中了。
-如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 “Changes not staged for
-commit” 部分（也就是 未暂存清单）看到：
+如果只是简单地从工作目录中手工删除文件，运行 `git status` 时就会在 `"Changes not staged for commit"`部分（也就是 未暂存清单）看到：
 
 ```java
 $ rm PROJECTS.md
@@ -328,7 +326,7 @@ deleted: PROJECTS.md
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
-然后再运行 git rm 记录此次移除文件的操作：
+然后再运行 `git rm` 记录此次移除文件的操作：
 
 ```java
 $ git rm PROJECTS.md
@@ -341,18 +339,17 @@ deleted: PROJECTS.md
 ```
 
 下一次提交时，该文件就不再纳入版本管理了。 如果删除之前修改过并且已经放到暂存区域的话，则必须要用
-强制删除选项 -f（译注：即 force 的首字母）。 这是一种安全特性，用于防止误删还没有添加到快照的数据，
+强制删除选项 `-f`（译注：即 `force` 的首字母）。 这是一种安全特性，用于防止误删还没有添加到快照的数据，
 这样的数据不能被 Git 恢复。
 另外一种情况是，我们想把文件从 Git 仓库中删除（亦即从暂存区域移除），但仍然希望保留在当前工作目录
-中。 换句话说，你想让文件保留在磁盘，但是并不想让 Git 继续跟踪。 当你忘记添加 .gitignore 文件，不小
-心把一个很大的日志文件或一堆 .a 这样的编译生成文件添加到暂存区时，这一做法尤其有用。 为达到这一目
-的，使用 --cached 选项：
+中。 换句话说，你想让文件保留在磁盘，但是并不想让 Git 继续跟踪。 当你忘记添加 `.gitignore`文件，不小心把一个很大的日志文件或一堆编译生成文件添加到暂存区时，这一做法尤其有用。 为达到这一目
+的，使用 `--cached` 选项：
 
 ```java
 $ git rm --cached README
 ```
 
-git rm 命令后面可以列出文件或者目录的名字，也可以使用 glob 模式。 比方说：
+`git rm` 命令后面可以列出文件或者目录的名字，也可以使用 glob 模式。 比方说：
 
 ```java
 $ git rm log/\*.log
@@ -482,7 +479,7 @@ $ git commit -m "remove test.txt"
 现在，文件就从版本库中被删除了。
 
 另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本：
-`$ git checkout -- test.txt`
+`git checkout -- test.txt`
 `git checkout`其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
 
 ### git各区介绍

@@ -227,7 +227,7 @@ excerpt_description: true
 # Please use <!-- more --> in the post to control excerpt accurately.
 # 文章首页不显示全部文章
 auto_excerpt:
-  enable: true
+  enable: false
   length: 150
 
 # Post meta display settings
