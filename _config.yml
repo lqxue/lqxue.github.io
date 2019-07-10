@@ -8,10 +8,10 @@ title: AI CODE
 #网站副标题
 subtitle: 
 # 站点的描述
-description: 世上无难事<br/>只要肯登攀
+description: 世上无难事<br/>只要肯登攀<br/>
 keywords: ai code
 # 作者的昵称
-author: lqxue
+author:
 # 语言切换成中文
 language: zh-Hans
 # 配置时区
@@ -90,5 +90,7 @@ deploy:
   type: git
   repository:
     github: git@github.com:lqxue/lqxue.github.io.git
-    coding: git@git.dev.tencent.com:liqingxue/aicode.git
+    #由于coding要各种审核文章,整体总是访问不稳定,所以此处不用了
+    #coding: git@git.dev.tencent.com:liqingxue/aicode.git
+    #此处留着可以上传到自己的服务器上,后期有时间搞
   branch: master

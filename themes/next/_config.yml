@@ -162,7 +162,8 @@ social_icons:
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
 # 设置头像
-avatar: /images/dang.gif
+#avatar: /images/dang.gif
+#avatar: https://dev.tencent.com/u/liqingxue/p/picture_list/git/raw/master/gif/dxflqm_becf949e-a480-4587-9e2d-44c2a5b68d2a.gif
 
 # Table Of Contents in the Sidebar
 toc:
@@ -603,7 +604,7 @@ busuanzi_count:
   # page_pv_header和page_pv_footer为自定义样式配置，
   # 相关的值留空时将不显示，可以使用（带特效的）font-awesome。显示效果为[page_pv_header]PV值[page_pv_footer]。
   page_pv: true
-  page_pv_header: <i class="fa fa-file-o">  本文总阅读量</i>
+  page_pv_header: <i class="fa fa-file-o">  阅读</i>
   page_pv_footer: 次
 
 
