@@ -89,4 +89,5 @@ theme: next
 deploy:
   type: git
   repository: git@github.com:lqxue/lqxue.github.io.git
+  tengxun: git@git.dev.tencent.com:liqingxue/aicode.git
   branch: master
