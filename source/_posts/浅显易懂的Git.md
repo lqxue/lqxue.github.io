@@ -23,7 +23,7 @@ categories: Git
 [下载Windows版本Git](https://git-scm.com/download/win)
 安装完成后，在开始菜单里找到`Git -> Git Bash`，蹦出一个类似命令行窗口的东西，就说明Git安装成功！
 
-![Git Bash](https://raw.githubusercontent.com/lqxue/picture_list/master/image/GitBash_1099779f-d52c-45f5-9903-9f3a1ab7b872.png)
+![Git Bash](https://dev.tencent.com/u/liqingxue/p/picture_list/git/raw/master/image/GitBash_1099779f-d52c-45f5-9903-9f3a1ab7b872.png)
 
 ## 配置信息
 
@@ -93,7 +93,7 @@ The key fingerprint is:
 
 将公钥放配置到`github`上或者其他的平台,就可以使用`ssh`进行提交或者克隆代码了
 
-![](https://raw.githubusercontent.com/lqxue/picture_list/master/image/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20190708165505.png)
+![](https://dev.tencent.com/u/liqingxue/p/picture_list/git/raw/master/image/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20190708165505.png)
 
 - 测试是否成功
 
@@ -284,7 +284,7 @@ git commit -m "代码提交描述"
 git push origin master
 ```
 
-![](https://raw.githubusercontent.com/lqxue/picture_list/master/image/3846387-f1b68fdf511e6c20.png)
+![](https://dev.tencent.com/u/liqingxue/p/picture_list/git/raw/master/image/3846387-f1b68fdf511e6c20.png)
 
 ## 忽略文件
 
@@ -399,13 +399,13 @@ cb926e7 HEAD@{3}: commit (initial): wrote a readme file
 
 - 版本库（Repository）工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。Git的版本库里存了很多东西，其中最重要的就是称为`stage`的暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。
 
-![](https://raw.githubusercontent.com/lqxue/picture_list/master/image/3846387-8cf5781ce75be78b.jpg)
+![](https://dev.tencent.com/u/liqingxue/p/picture_list/git/raw/master/image/3846387-8cf5781ce75be78b.jpg)
 
 ## 分支
 
 ### 分支图
 
-![](https://raw.githubusercontent.com/lqxue/picture_list/master/image/3846387-88817c76b6337811.jpg)
+![](https://dev.tencent.com/u/liqingxue/p/picture_list/git/raw/master/image/3846387-88817c76b6337811.jpg)
 
 ### 查看分支
 
