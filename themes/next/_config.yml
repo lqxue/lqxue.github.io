@@ -588,7 +588,7 @@ busuanzi_count:
 
   # 效果：本站访客数12345人次
   site_uv: true
-  site_uv_header: <i class="fa fa-user">  本站访客数</i>
+  site_uv_header: <i class="fa fa-user"></i><span class="span">访客</span>
   site_uv_footer: 人次
   # custom pv span for the whole site
   # 当site_pv: true时，代表在页面底部显示站点的PV值。
@@ -597,14 +597,14 @@ busuanzi_count:
 
 # 效果：本站总访问量12345次
   site_pv: true
-  site_pv_header: <i class="fa fa-eye">  本站总访问量</i>
+  site_pv_header: <i class="fa fa-eye"></i><span class="span">访问量</span>
   site_pv_footer: 次
   # custom pv span for one page only
   # 当page_pv: true时，代表在文章页面的标题下显示该页面的PV值（阅读数）。
   # page_pv_header和page_pv_footer为自定义样式配置，
   # 相关的值留空时将不显示，可以使用（带特效的）font-awesome。显示效果为[page_pv_header]PV值[page_pv_footer]。
   page_pv: true
-  page_pv_header: <i class="fa fa-file-o">  阅读</i>
+  page_pv_header: <i class="fa fa-file-o"></i><span class="span">阅读量</span>
   page_pv_footer: 次
 
 
@@ -722,7 +722,7 @@ fancybox: true
 
 # Progress bar in the top during page loading.
 # 页面加载过程中顶部的进度条。
-pace: true
+pace: false
 # Themes list:
 #pace-theme-big-counter
 #pace-theme-bounce
