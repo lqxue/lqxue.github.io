@@ -6,10 +6,6 @@ tags:
 categories: Git
 ---
 
-> 本文只是简单的记录了自己开发中涉及到的命令,后期也会不断更新.
-[廖雪峰Git教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
-[或许是介绍Android Studio使用Git最详细的文章](http://wensibo.top/2017/03/12/GitOnAS/)
-
 ## 安装Git
 
 - 在Linux上安装Git
