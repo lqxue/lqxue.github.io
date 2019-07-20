@@ -6,23 +6,11 @@ tags:
 categories: Android
 ---
 
+## Activity对点击事件的分发过程
 
-## 事件分发的源码解析
-
-### 1.Activity对点击事件的分发过程
-
-点击事件用`MotionEvent`来表示，当一个点击操作发生的时候，事件最先传递给当前`Activity`，由`Activity`的`dispatchTouchEvent`来进行事件的派发，具体的工作是由Activity内部的window来完成的，window会将事件传递给`decor view`,`decor view`一般都是当前界面的底层容器，通过Activity.getWindow.getDecorView()获得，我们可用先从`Activity`的`dispatchTouchEvent`的源码看起：
+点击事件用`MotionEvent`来表示，当一个点击操作发生的时候，事件最先传递给当前`Activity`，由`Activity`的`dispatchTouchEvent`来进行事件的派发，具体的工作是由Activity内部的window来完成的，window会将事件传递给`decor view`,`decor view`一般都是当前界面的底层容器，通过`Activity.getWindow.getDecorView()`获得，我们可以先从`Activity`的`dispatchTouchEvent`的源码看起：
 
 ```java
-/**
- *处理触摸屏事件。 
- *可以覆盖此方法在分发所有触摸屏事件之前拦截所有事件
- *当然最后还要调用此方法一下,否则事件无法正常分发传递给view。
- *
- * @param ev触摸屏事件。
- *
- * @return boolean如果消耗此事件，则返回true。
-*/
 public boolean dispatchTouchEvent(MotionEvent ev) {
     if (ev.getAction() == MotionEvent.ACTION_DOWN) {
         onUserInteraction();
@@ -33,17 +21,18 @@ public boolean dispatchTouchEvent(MotionEvent ev) {
     return onTouchEvent(ev);
 }
 ```
+
 <!-- more -->
 
-先分析下上面的代码,首先事件交给Activity的dispatchTouchEvent进行分发,然后在通过`getWindow().superDispatchTouchEvent(ev)`把事件分发给activity所依附的window，如果返回true那就结束了，如果返回false的话就没人处理，那么Activity的`onTouchEvent`就会被调用
+先分析下上面的代码,首先事件交给`Activity`的`dispatchTouchEvent`进行分发,然后在通过`getWindow().superDispatchTouchEvent(ev)`把事件分发给`activity`所依附的`window`，如果返回`true`那就结束了，如果返回false的话就没人处理，那么Activity的`onTouchEvent`就会被调用。
 
-接下来我们看下`getWindow().superDispatchTouchEvent(ev)`里面window是如何将事件传递给ViewGroup的，通过源码我们知道，window时一个抽象类，而window的super.dispatchTouchEvent(ev)方法也是抽象的，因此我们必须找到window的实现类
+接下来我们看下`getWindow().superDispatchTouchEvent(ev)`里面window是如何将事件传递给ViewGroup的，通过源码我们知道，window是一个抽象类，而window的`superdispatchTouchEvent(ev)方法也是抽象的`，因此我们必须找到window的实现类
 
 ```java
 public abstract boolean superDispatchTouchEvent(MotionEvent event);
 ```
 
-那么window的实现类是什么呢？就是phonewindow，这点源码中有一段注释就说明了
+那么window的实现类是什么呢？就是`phonewindow`，这点源码中有一段注释就说明了
 
 ```java
 /**
@@ -61,7 +50,7 @@ public abstract class Window {
 }
 ```
 
-上面的意思大概就是winodw类控制顶级的View的外观和行为机制，他的唯一实现位于`android.policy.PhoneWinodw`中
+上面的意思大概就是`window`类控制顶级的View的外观和行为机制，他的唯一实现是`android.policy.PhoneWinodw`。
 
 由于Window的唯一实现是PhoneWindow，那我们看一下PhoneWindow是如何处理点击事件的
 
@@ -72,7 +61,7 @@ public boolean superDispatchTouchEvent(MotionEvent event) {
 }
 ```
 
-我们进入`mDecor.superDispatchTouchEvent(event);`方法中
+我们接下来再进入`mDecor.superDispatchTouchEvent(event);`方法中
 
 ```java
 public boolean superDispatchTouchEvent(MotionEvent event) {
@@ -85,22 +74,12 @@ public boolean superDispatchTouchEvent(MotionEvent event) {
 ```java
 public class DecorView extends FrameLayout implements RootViewSurfaceTaker, WindowCallbacks {
     ...
-    // This is the top-level view of the window, containing the window decor.
-    private DecorView mDecor;
-    
-     @Override
-    public final View getDecorView() {
-        if (mDecor == null || mForceDecorInstall) {
-            installDecor();
-        }
-        return mDecor;
-    }
 }
 ```
 
-很明显`DecorView`继承自`FrameLayou`，所以最终事件会传递给`ViewGroup`的`dispatchTouchEvent`。不过上面只是分析了事件从`Activity`传递到`ViewGroup`的过程,但这不是我们的重点，重点是事件到了`ViewGroup`以后应该如何传递，从这里开始，事件已经传递到顶级`ViewGroup`了，接下来就开始分析具体的事件传递了接！
+很明显`DecorView`继承自`FrameLayou`，所以最终事件会传递给`ViewGroup`的`dispatchTouchEvent`。不过上面只是分析了事件从`Activity`传递到`ViewGroup`的过程,但这不是我们的重点，重点是事件到了`ViewGroup`以后应该如何传递，从这里开始，事件已经传递到顶级`ViewGroup`了，接下来就开始分析具体的事件传递了。
 
-### 顶级ViewGroup对事件的分发过程
+## 顶级ViewGroup对事件的分发过程
 
 点击事件达到顶级`ViewGroup`以后，会调用`ViewGroup`的`dispatchTouchEvent`方法
 
@@ -322,7 +301,7 @@ public boolean dispatchTouchEvent(MotionEvent ev) {
 }
 ```
 
-由于这个方法比较长，这里分段说明。先看下面一段
+由于这个方法比较长，下面进行分段说明。先看下面一段
 
 ```java
 // Check for interception.
@@ -343,23 +322,22 @@ if (actionMasked == MotionEvent.ACTION_DOWN
 }
 ```
 
-很显然，它描述的是当ViewGroup是否拦截点击事情这个逻辑。
+很显然，它描述的是ViewGroup是否拦截点击事件这个逻辑。
 
-从上面代码我们可以看出，ViewGroup在如下两种情况下会判断是否要拦截当前事件：`事件类型为ACTION_DOWN`或者`mFirstTouchTarget!=null`,`ACTION_DOWN`事件好理解，那么`mFirstTouchTarget!=null`是什么意思呢？这个从后面的代码逻辑可以看出来
+从上面代码我们可以看出，ViewGroup在如下两种情况下会判断是否要拦截当前事件:
 
-```java
-if (!canceled && !intercepted) {
-    详细逻辑可以看上面代码
-}
-```
+- `事件类型为ACTION_DOWN`
+- `mFirstTouchTarget!=null`
 
-当ViewGroup不拦截事件时`intercepted = onInterceptTouchEvent(ev);`中的`intercepted`为false，那下面那段代码就会执行`mFirstTouchTarget`会被赋值并指向子元素，也就是说，当ViewGroup不拦截事件并将事件交由子元素处理时`mFirstTouchTarget != null`。
+`ACTION_DOWN`事件好理解，那么`mFirstTouchTarget!=null`是什么意思呢？下面就开始分析下:
+
+当ViewGroup不拦截事件时`intercepted = onInterceptTouchEvent(ev);`中的`onInterceptTouchEvent`返回`false`，那下面分发给子类并通过`mFirstTouchTarget`来标记处理事件的view的那段代码就会执行， `mFirstTouchTarget`会被赋值并指向子元素，也就是说，当ViewGroup不拦截事件并将事件交由子元素处理时`mFirstTouchTarget != null`。
 
 反过来，一旦事件由当前ViewGroup拦截时`intercepted`就为true，那`if (!canceled && !intercepted)`就不成立,那么mFirstTouchTarget就不会被赋值为子元素,那 `mFirstTouchTarget != null`就不成立。那么当`ACTION_MOVE和ACTION_UP`事件到来时，由于`actionMasked == MotionEvent.ACTION_DOWN || mFirstTouchTarget != null`这个条件为false，将导致`ViewGroup` 的`onInterceptTouchEvent`不会再被调用，那也就是说同一序列中的其他事件都会默认交给此ViewGroup去处理了。
 
 当然，这里有一种特殊情况，就是上面代码中`final boolean disallowIntercept = (mGroupFlags & FLAG_DISALLOW_INTERCEPT) != 0`这个判断,如果`disallowIntercept`为false那就走父类拦截方法,如果为true那就不走父类拦截方法,这个`mGroupFlags & FLAG_DISALLOW_INTERCEPT`是否等于0,有以下两个地方决定
 
-第一个地方是每次DOWN事件来的时候都会执行的下面的一段代码
+第一个地方是每次`DOWN`事件来的时候都会执行的下面的一段代码
 
 ```java
 private void resetTouchState() {
@@ -396,7 +374,7 @@ public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
 通过上面两段代码我们知道
 
-- `mGroupFlags &= ~FLAG_DISALLOW_INTERCEPT`执行后再执行`mGroupFlags & FLAG_DISALLOW_INTERCEPT`一定为0
+- `mGroupFlags &= ~FLAG_DISALLOW_INTERCEPT`执行完后再执行`mGroupFlags & FLAG_DISALLOW_INTERCEPT`一定为0
 - `mGroupFlags |= FLAG_DISALLOW_INTERCEPT`执行后再执行`mGroupFlags & FLAG_DISALLOW_INTERCEPT`一定不为0
 
 为什么呢?
@@ -420,13 +398,15 @@ mGroupFlags & 1000000000000000000 最后一定是0
 
 此处我只分析这一种另一种自己分析
 
-有了上面的分析我们可以知道:ViewGroup在事件分发时,如果是ACTION_DOWN就会执行`mGroupFlags &= ~FLAG_DISALLOW_INTERCEPT`使其 `final boolean disallowIntercept = (mGroupFlags & FLAG_DISALLOW_INTERCEPT) != 0` 中的disallowIntercept为false,也就是当DOWN来的时候ViewGroup总是会调用自己的`onInterceptTouchEvent`方法询问自己是否拦截事件,而在子类设置了`requestDisallowInterceptTouchEvent(true)`后`final boolean disallowIntercept = (mGroupFlags & FLAG_DISALLOW_INTERCEPT) != 0`中的disallowIntercept为true结果就是除了DOWN的其他事件都不会被父类拦截了
+有了上面的分析我们可以知道:ViewGroup在事件分发时,如果是`ACTION_DOWN`就会执行`mGroupFlags &= ~FLAG_DISALLOW_INTERCEPT`使其 `final boolean disallowIntercept = (mGroupFlags & FLAG_DISALLOW_INTERCEPT) != 0` 中的`disallowIntercept`为`false`,也就是当`DOWN`事件来的时候ViewGroup总是会调用自己的`onInterceptTouchEvent`方法询问自己是否拦截事件,而在子类设置了`requestDisallowInterceptTouchEvent(true)`后`final boolean disallowIntercept = (mGroupFlags & FLAG_DISALLOW_INTERCEPT) != 0`中的disallowIntercept为true，那当除了`DOWN`的其他事件都不会被父类拦截了
 
 **结论:**
 当ViewGroup决定拦截事件后,那么后续的点击事件将默认交给它处理并不会再调用它的`onInterceptTouchEvent`方法,`FLAG_DISALLOW_INTERCEPT`标志位的作用是让ViewGroup不再拦截事件,当然前提是ViewGroup不拦截ACTION_DOWN事件,通过上面的分析我们还可以得到:
 
 - 第一点:`onInterceptTouchEvent`不是每次事件都会调用,如果我们想提前处理所有的点击事件,要选择`dispatchTouchEvent`方法,只有这个方法能保证每次都会调用,当然前提是事件能够传递到当前的ViewGroup;
-- 另一点:`FLAG_DISALLOW_INTERCEPT`标志位的作用可以解决一些滑动冲突,后面会分析.
+- 另一点:`FLAG_DISALLOW_INTERCEPT`标志位的作用可以解决一些滑动冲突。
+
+## ViewGroup分发子元素事件
 
 接下来我们再看下ViewGroup不拦截事件的时候，事件会向下分发由他的子View进行处理：
 
@@ -509,7 +489,7 @@ break;
 
 这几行代码就完成了`mFirstTouchTarget`的赋值并且并终止对子元素的遍历，如果子元素的`dispatchTouchEvent`返回false，ViewGroup就会把事件分给下一个子元素(如果还有下一个子元素的话)
 
-其实mFirstTouchTarget真正的赋值过程是在addTouchTarget内部完成的，从下面的addTouchTarget的内部结构就可以看出，mFirstTouchTarget其实是一种单链表的结构，mFirstTouchTarget是否被赋值，将直接影响到ViewGroup对事件的拦截机制，如果mFirstTouchTarget为null，那么ViewGroup就默认拦截下来同一序列中所有的点击事件
+其实`mFirstTouchTarget`真正的赋值过程是在`addTouchTarget`方法内部完成的，从下面的`addTouchTarget`的内部结构就可以看出，`mFirstTouchTarget`其实是一种单链表的结构，`mFirstTouchTarget`是否被赋值，将直接影响到ViewGroup对事件的拦截机制，如果`mFirstTouchTarget`为null，那么ViewGroup就默认拦截下同一序列中所有的点击事件
 
 ```java
 private TouchTarget addTouchTarget(@NonNull View child, int pointerIdBits) {
@@ -533,7 +513,7 @@ if (mFirstTouchTarget == null) {
 
 注意上面这段话，这里的第三个参数child为null，从上面的分析我们可用知道，他会调用`supe.dispatchTouchEvent(event)`，很显然，这里就转到了View的`dispatchTouchEvent`方法，就是点击事件开始给View处理了,下面开始分析View对点击事件的处理
 
-### View对点击事件的处理过程
+## View对点击事件的处理过程
 
 View对点击事件的处理过程稍微简单一些，这里注意，这里的View不包含ViewGroup，先看他的`dispatchTouchEvent`方法
 
@@ -592,7 +572,7 @@ public boolean dispatchTouchEvent(MotionEvent event) {
 }
 ```
 
-View点击事件的处理就比较简单了，因为他只是一个View，他没有子元素所以无法向下传递，所以只能自己处理点击事件，从上面的源码可以看出View对点击事件的处理过程，首选会判断你有没有设置`onTouchListener`，如果`onTouchListener`中的`onTouch`为true，那么`onTouchEvent`就不会被调用，可见`onTouchListener`的优先级高`于onTouchEvent`，这样做到好处就是方便在外界通过设置`onTouchListener`来处理点击事件;
+View点击事件的处理就比较简单了，因为他只是一个View，他没有子元素所以无法向下传递，所以只能自己处理点击事件，从上面的源码可以看出View对点击事件的处理过程，首选会判断你有没有设置`onTouchListener`，如果`onTouchListener`中的`onTouch`为true，那么`onTouchEvent`就不会被调用，可见`onTouchListener`的优先级高`于onTouchEvent`，这样做的好处就是方便在外界通过设置`onTouchListener`来处理点击事件。
 
 接着我们再来分析下`onTouchEvent`的实现
 
@@ -752,7 +732,7 @@ if ((viewFlags & ENABLED_MASK) == DISABLED) {
     }
 ```
 
-接着，如果View设置有代理，那么还会执行TouchDelegate的onTouchEvent方法，这个onTouchEvent的工作机制看起来和onTouchListener类似，这里就不深究了
+接着，如果View设置有代理，那么还会执行`TouchDelegate`的`onTouchEvent`方法，这个看起来和`onTouchListener`类似，这里就不深究了
 
 ```java
 if (mTouchDelegate != null) {
@@ -762,7 +742,7 @@ if (mTouchDelegate != null) {
     }
 ```
 
-下面再看一下onTouchEvent中点击事件的具体处理，如下所示：
+下面再看一下`onTouchEvent`中点击事件的具体处理，如下所示：
 
 ```java
     if (((viewFlags & CLICKABLE) == CLICKABLE ||
@@ -830,7 +810,7 @@ public boolean performClick() {
 }
 ```
 
-View的LONG_CLICKABLE属性默认为false，而CLICKABLE属性是否为false和具体的View有关，确切的说是可点击的View其CLICKABLE为true，不可点击的为false，比如button是可点击的，textview是不可点击的，通过`setClickable`和`setLongClickable`可以分别改变View的CLICKABLE和LONG_CLICKABLE属性，另外,setOnClickListener会自动的将View的CLICKABLE设为true,setOnLongClickListener也会自动将LONG_CLICKABLE属性设为true,这点我们看源码：
+View的LONG_CLICKABLE属性默认为false，而CLICKABLE属性是否为什么和具体的View有关，确切的说是可点击的View其CLICKABLE为true，不可点击的为false，比如button是可点击的，textview是不可点击的，通过`setClickable`和`setLongClickable`可以分别改变View的CLICKABLE和LONG_CLICKABLE属性值，另外,setOnClickListener会自动的将View的CLICKABLE设为true,setOnLongClickListener也会自动将LONG_CLICKABLE属性设为true,这点我们看源码：
 
 ```java
 public void setOnClickListener(@Nullable OnClickListener l) {
@@ -847,6 +827,7 @@ public void setOnLongClickListener(@Nullable OnLongClickListener l) {
     getListenerInfo().mOnLongClickListener = l;
 }
 ```
+
 到这里，点击事件的分发机制源码就分析完成了
 
 ## 总结
@@ -855,7 +836,7 @@ public void setOnLongClickListener(@Nullable OnLongClickListener l) {
 
 - puhlic boolean dispatchTouchEvent(MotionEvent ev)
 
-用来进行事件的分发。如果事件能够传递给当前View，那么此方法一定会被调用，返回结果受当前View的onTouchEvent和下级View的dispatchTouchEvent方法的影响，表示是否消耗当前事件。
+用来进行事件的分发。如果事件能够传递给当前View，那么此方法一定会被调用，返回结果受当前View的`onTouchEvent`和下级View的`dispatchTouchEvent`方法的影响，表示是否消耗当前事件。
 
 - public boolean onInterceptTouchEven(MotionEvent event)
 
@@ -863,19 +844,19 @@ public void setOnLongClickListener(@Nullable OnLongClickListener l) {
 
 - public boolean onTouchEvent(MotionEvent event)
 
-在dispatchTouchEvent方法中调用，用来处理点击事件，返回结果表示是否消耗当前事件，如果不消耗，则在同一个事件序列中，当前View无法再次接收到事件。
+在`dispatchTouchEvent`方法中调用，用来处理点击事件，返回结果表示是否消耗当前事件，如果不消耗，则在同一个事件序列中，当前View无法再次接收到事件。
 
 对于一个根`ViewGroup`来说，点击事件产生以后，首先传递给`ViewGroup`，这时它的dispatchTouchEvent就会被调用，如果这个ViewGroup的`onIntereptTouchEvent`方法返回true就表示它要控截当前事件，接着事件就会交给这个`ViewGroup`处理，则他的`onTouchEvent`方法就会被调用；如果这个ViewGroup的`onIntereptTouchEvent`方法返回`false`就表示不需要拦截当前事件，这时当前事件就会继续传递给它的子元素，接着子元素的`dispatchTouchEvent`方法就会被调用，如此反复直到事件被最终处理。
 
 当一个View需要处理事件时，如果它设置了`OnTouchListener`，那么`OnTouchListener`中的`onTouch`方法会被回调。这时事件如何处理还要看onTouch的返回值，如果返回`false`,那当前的View的方法`onTouchEvent`会被调用；如果返回`true`，那么`onTouchEvent`方法将不会被调用。由此可见，给View设置的`OnTouchListener`优先级比`onTouchEvent`要高，在`onTouchEvent`方法中，如果当前设置的有`OnClickListener`，那么它的`onClick`方法会被调用。可以看出，平时我们常用的`OnClickListener`，其优先级最低，即处于事件尾端。
 
-当一个点击事件产生后，它的传递过程遵循如下顺序：`Activity-->Window-->View`，即事件总是先传递给`Activity`,`Activity`再传递给`Window`，最后`Window`再传递给顶级`View`。顶级`View`接收到事件后，就会按照事件分发机制去分发事件。考虑一种情况，如果一个View的`onTouchEvent`返回`false`，那么它的父容器的`onTouchEvent`将会被调用，依此类推,如果所有的元素都不处理这个事件，那么这个事件将会最终传递给`Activity`处理，即`Activity`的`onTouchEvent`方法会被调用。
+当一个点击事件产生后，它的传递过程遵循如下顺序：`Activity-->Window-->View`，即事件总是先传递给`Activity`,`Activity`再传递给`Window`，最后`Window`再传递给顶级`ViewGroup`。顶级`ViewGroup`接收到事件后，就会按照事件分发机制去分发事件。考虑一种情况，如果一个View的`onTouchEvent`返回`false`，那么它的父容器的`onTouchEvent`将会被调用，依此类推,如果所有的元素都不处理这个事件，那么这个事件将会最终传递给`Activity`处理，即`Activity`的`onTouchEvent`方法会被调用。
 
 关于事件传递的机制，这里先给出一些结论，具体分析上文已经结合源码进行了讲解
 
 - （1）同一个事件序列是指从手指接触屏幕的那一刻起，到手指离开屏慕的那一刻结束，在这个过程中会产生产生的一系列事件，这个事件序列以`down`事件开始，中间含有数量不定的`move`事件，最后以`up`事件结束
 
-- （2）正常情况下，一个事件序列只能被一个Visw拦截且消耗。这一条的原因可以参考（3），因为一旦一个元素拦截了某此事件，那么同一个事件序列内的所有事件都会直接交给它处理，因此同一个事件序列中的事件不能分别由两个View同时处理，但是通过特殊手段可以做到，比如一个Vew将本该自己处理的事件通过onTouchEvent强行传递给其他View处理。
+- （2）正常情况下，一个事件序列只能被一个View拦截且消耗。这一条的原因可以参考（3），因为一旦一个元素拦截了某此事件，那么同一个事件序列内的所有事件都会直接交给它处理，因此同一个事件序列中的事件不能分别由两个View同时处理，但是通过特殊手段可以做到，比如一个View将本该自己处理的事件通过onTouchEvent强行传递给其他View处理。
 
 - （3)某个View一旦决定拦截，那么这一个事件序列都只能由它来处理（如果事件序列能够传递给它的话)，并且它的onInterceprTouchEvent不会再被调用。这条也很好理解，就是说当一个View决定拦截一个事件后，那么系统会把同一个事件序列内的其他方法都直接交给它来处理，因此就不用再调用这个View的onInterceptTouchEvent去询问它是否要拦截了。
 
@@ -893,4 +874,4 @@ public void setOnLongClickListener(@Nullable OnLongClickListener l) {
 
 - （10）onclick会发生的前提实际当前的View是可点击的，并且他收到了down和up的事件
 
-- (11)事件传递过程是由外到内的，理解就是事件总是先传递给父元素，然后再由父元素分发给子View，通过requestDisallowInterptTouchEvent方法可以再子元素中干预元素的事件分发过程，但是ACTION_DOWN除外。
+- (11)事件传递过程是由外到内的，理解就是事件总是先传递给父元素，然后再由父元素分发给子View，子View可以通过requestDisallowInterptTouchEvent方法干预父ViewGroup的事件分发过程，但是ACTION_DOWN除外。
