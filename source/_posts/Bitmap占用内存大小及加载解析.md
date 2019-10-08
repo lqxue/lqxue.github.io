@@ -24,6 +24,8 @@ categories: Android
 
 我们如果加载app内图片，想知道它占用多少内存，可先将此资源转成bitmap进行查看。
 
+<!-- more -->
+
 ### 1. 从资源中获取bitmap
 
 ```java

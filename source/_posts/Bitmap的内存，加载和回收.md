@@ -28,6 +28,8 @@ BitmapFactory类提供了四类方法用来加载Bitmap：
 
 注意：查看源码可以发现，decodeFile()和decodeResource()间接调用decodeStream()。
 
+<!-- more -->
+
 ## Bitmap的内存位置
 
 在Android3.0之前：Bitmap的像素数据存放在Native内存，而Bitmap对象本身则存放在Dalvik Heap中。
