@@ -53,17 +53,17 @@ counter:
   tag_cloud:
     zero: 暫無標籤
     one: 目前共計 1 個標籤
-    other: "目前共計 %JVM内存结构 & Java内存模型 & Java对象模型.md 個標籤"
+    other: "目前共計 %d 個標籤"
 
   categories:
     zero: 暫無分類
     one: 目前共計 1 個分類
-    other: "目前共計 %JVM内存结构 & Java内存模型 & Java对象模型.md 個分類"
+    other: "目前共計 %d 個分類"
 
   archive_posts:
     zero: 暫無文章。
     one: 目前共計 1 篇文章。
-    other: "目前共計 %JVM内存结构 & Java内存模型 & Java对象模型.md 篇文章。"
+    other: "目前共計 %d 篇文章。"
 
 state:
   posts: 文章

@@ -48,17 +48,17 @@ counter:
   tag_cloud:
     zero: タグなし
     one: "全 1 タグ"
-    other: "全 %JVM内存结构 & Java内存模型 & Java对象模型.md タグ"
+    other: "全 %d タグ"
 
   categories:
     zero: カテゴリなし
     one: "全 1 カテゴリ"
-    other: "全 %JVM内存结构 & Java内存模型 & Java对象模型.md カテゴリ"
+    other: "全 %d カテゴリ"
 
   archive_posts:
     zero: ポストなし
     one: "全 1 ポスト"
-    other: "全 %JVM内存结构 & Java内存模型 & Java对象模型.md ポスト"
+    other: "全 %d ポスト"
 
 state:
   posts: ポスト

@@ -54,17 +54,17 @@ counter:
   tag_cloud:
     zero: Không có thẻ nào
     one: có 1 thẻ tất cả
-    other: "có %JVM内存结构 & Java内存模型 & Java对象模型.md thẻ tất cả"
+    other: "có %d thẻ tất cả"
 
   categories:
     zero: Không có trong mục nào
     one: có 1 mục tất cả
-    other: "có %JVM内存结构 & Java内存模型 & Java对象模型.md mục tất cả"
+    other: "có %d mục tất cả"
 
   archive_posts:
     zero: Không có bài viết.
     one: 1 bài viết.
-    other: "tổng số %JVM内存结构 & Java内存模型 & Java对象模型.md bài viết."
+    other: "tổng số %d bài viết."
 
 state:
   posts: bài viết

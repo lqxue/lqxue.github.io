@@ -50,17 +50,17 @@ counter:
   tag_cloud:
     zero: Keine Tags
     one: Insgesamt ein Tag
-    other: "Insgesamt %JVM内存结构 & Java内存模型 & Java对象模型.md Tags"
+    other: "Insgesamt %d Tags"
 
   categories:
     zero: Keine Kategorien
     one: Insgesamt eine Kategorie
-    other: "Insgesamt %JVM内存结构 & Java内存模型 & Java对象模型.md Kategorien"
+    other: "Insgesamt %d Kategorien"
 
   archive_posts:
     zero: Keine Artikel vorhanden.
     one: Ein Artikel.
-    other: "Insgesamt %JVM内存结构 & Java内存模型 & Java对象模型.md Artikel."
+    other: "Insgesamt %d Artikel."
 
 state:
   posts: Artikel
