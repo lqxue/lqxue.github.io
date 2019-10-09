@@ -48,17 +48,17 @@ counter:
   tag_cloud:
     zero: Tidak ada tags
     one: 1 total tag
-    other: "%d total tags"
+    other: "%JVM内存结构 & Java内存模型 & Java对象模型.md total tags"
 
   categories:
     zero: Tidak ada kategori
     one: 1 total categori
-    other: "%d total kategori"
+    other: "%JVM内存结构 & Java内存模型 & Java对象模型.md total kategori"
 
   archive_posts:
     zero: Tidak ada posting.
     one: 1 posting.
-    other: "%d total posting."
+    other: "%JVM内存结构 & Java内存模型 & Java对象模型.md total posting."
 
 state:
   posts: posting

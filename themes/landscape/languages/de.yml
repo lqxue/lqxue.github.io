@@ -8,7 +8,7 @@ next: weiter
 comment: Kommentare
 archive_a: Archiv
 archive_b: "Archive: %s"
-page: Seite %d
+page: Seite %JVM内存结构 & Java内存模型 & Java对象模型.md
 recent_posts: letzter Beitrag
 newer: Neuer
 older: Älter

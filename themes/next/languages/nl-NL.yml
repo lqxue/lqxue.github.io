@@ -54,17 +54,17 @@ counter:
   tag_cloud:
     zero: Geen labels
     one: 1 label in totaal
-    other: "%d labels in totaal"
+    other: "%JVM内存结构 & Java内存模型 & Java对象模型.md labels in totaal"
 
   categories:
     zero: Geen categorieën
     one: 1 categorie in totaal
-    other: "%d categorieën in totaal"
+    other: "%JVM内存结构 & Java内存模型 & Java对象模型.md categorieën in totaal"
 
   archive_posts:
     zero: Geen posts.
     one: 1 post.
-    other: "%d posts in totaal."
+    other: "%JVM内存结构 & Java内存模型 & Java对象模型.md posts in totaal."
 
 state:
   posts: posts

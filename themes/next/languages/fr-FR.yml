@@ -48,17 +48,17 @@ counter:
   tag_cloud:
     zero: Aucun tags
     one: 1 tag au total
-    other: "%d tags au total"
+    other: "%JVM内存结构 & Java内存模型 & Java对象模型.md tags au total"
 
   categories:
     zero: Aucun categories
     one: 1 category au total
-    other: "%d categories au total"
+    other: "%JVM内存结构 & Java内存模型 & Java对象模型.md categories au total"
 
   archive_posts:
     zero: Aucun article.
     one: 1 article.
-    other: "%d articles au total."
+    other: "%JVM内存结构 & Java内存模型 & Java对象模型.md articles au total."
 
 state:
   posts: articles

@@ -8,7 +8,7 @@ next: Вперед
 comment: Комментарии
 archive_a: Архив
 archive_b: "Архив: %s"
-page: Страница %d
+page: Страница %JVM内存结构 & Java内存模型 & Java对象模型.md
 recent_posts: Недавние записи
 newer: Следующий
 older: Предыдущий
