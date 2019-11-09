@@ -89,7 +89,7 @@ theme: next
 deploy:
   type: git
   repository:
-    github: git@github.com:lqxue/lqxue.github.io.git
+    github: https://github.com/lqxue/lqxue.github.io.git
     #由于coding要各种审核文章,整体总是访问不稳定,所以此处不用了
     #coding: git@git.dev.tencent.com:liqingxue/aicode.git
     #此处留着可以上传到自己的服务器上,后期有时间搞
